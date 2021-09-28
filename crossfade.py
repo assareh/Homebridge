@@ -34,4 +34,7 @@ for j in range(0, 20):
 requests.request("PUT", URL4, data=OFF_PAYLOAD, verify=False)
 
 # Clear the flag to turn it off in HomeKit
-os.remove(os.path.join(os.path.dirname(__file__), 'crossfade') + '.pid')
+if sys.argv[1] == '4':
+    os.remove(os.path.join(os.path.dirname(__file__), 'crossfade_leo') + '.pid')
+elif sys.argv[1] == '2':
+    os.remove(os.path.join(os.path.dirname(__file__), 'crossfade_lr') + '.pid')
