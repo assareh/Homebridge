@@ -14,9 +14,3 @@ kill $pid
 
 # clean up
 rm -rf $PID_FILE
-
-# turn off the light
-python /homebridge/scripts/crossfade_off.py 4
-
-# remove the flag
-rm -rf /homebridge/scripts/script2.flag
