@@ -3,6 +3,7 @@
 """ This script cycles the color lamp through the rainbow
     Requires a command line argument of lamp number
     4 is Leo's Lamp
+    3 is Office
     2 is Living Room Color """
 
 import os
