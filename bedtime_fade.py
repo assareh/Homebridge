@@ -13,7 +13,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 def current_state():
     """ This function returns the current color parameters """
     
-    URL = "http://hue-bridge.service.consul/api/" + API_KEY + "/lights/4"
+    URL = "https://hue-bridge.service.consul/api/" + API_KEY + "/lights/4"
     current = requests.request("GET", URL, verify=False)
     x = current.json()['state']['xy'][0]
     y = current.json()['state']['xy'][1]
@@ -57,7 +57,7 @@ def crossfade(begin_state, end_state):
 API_KEY = os.environ['HUE_API_KEY']
 
 # Initialize other variables
-URL4 = "http://hue-bridge.service.consul/api/" + API_KEY + "/lights/4/state"
+URL4 = "https://hue-bridge.service.consul/api/" + API_KEY + "/lights/4/state"
 
 # state definitions
 # BEGIN_STATE = {'x': 0.4444, 'y': 0.4053, 'bri': 127, 'hue': 8496, 'sat': 118}
