@@ -9,6 +9,20 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
+# function that gets the current state of the lamp
+def current_state():
+    """ This function returns the current color parameters """
+    
+    URL = "http://hue-bridge.service.consul/api/" + API_KEY + "/lights/4"
+    current = requests.request("GET", URL, verify=False)
+    x = current.json()['state']['xy'][0]
+    y = current.json()['state']['xy'][1]
+    bri = current.json()['state']['bri']
+    hue = current.json()['state']['hue']
+    sat = current.json()['state']['sat']
+    return {'x': x, 'y': y, 'bri': bri, 'hue': hue, 'sat': sat}
+
+
 # function that given begin state, end state and time delay performs the crossfade
 def crossfade(begin_state, end_state):
     """ This function fades the specified lamp from one color state to another """
@@ -46,15 +60,16 @@ API_KEY = os.environ['HUE_API_KEY']
 URL4 = "http://hue-bridge.service.consul/api/" + API_KEY + "/lights/4/state"
 
 # state definitions
-BEGIN_STATE = {'x': 0.4444, 'y': 0.4053, 'bri': 127, 'hue': 8496, 'sat': 118}
+# BEGIN_STATE = {'x': 0.4444, 'y': 0.4053, 'bri': 127, 'hue': 8496, 'sat': 118}
+BEGIN_STATE = current_state()
 END_STATE = {'x': 0.6922, 'y': 0.3076, 'bri': 2, 'hue': 0, 'sat': 254}
 
 # initialize lights to storytime
-PAYLOAD = "{\n    \"on\": true,\n    \"xy\": [\n            " + str(BEGIN_STATE['x'])\
-    + ",\n            " + str(BEGIN_STATE['y']) + "\n        ],\n    \"sat\":" + \
-        str(BEGIN_STATE['sat']) + ",\n    \"bri\":" + str(BEGIN_STATE['bri']) + \
-            ",\n    \"hue\":" + str(BEGIN_STATE['hue']) + "\n}"
-requests.request("PUT", URL4, data=PAYLOAD, verify=False)
+# PAYLOAD = "{\n    \"on\": true,\n    \"xy\": [\n            " + str(BEGIN_STATE['x'])\
+#     + ",\n            " + str(BEGIN_STATE['y']) + "\n        ],\n    \"sat\":" + \
+#         str(BEGIN_STATE['sat']) + ",\n    \"bri\":" + str(BEGIN_STATE['bri']) + \
+#             ",\n    \"hue\":" + str(BEGIN_STATE['hue']) + "\n}"
+# requests.request("PUT", URL4, data=PAYLOAD, verify=False)
 
 crossfade(BEGIN_STATE, END_STATE)
 
