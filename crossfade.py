@@ -19,7 +19,7 @@ API_KEY = os.environ['HUE_API_KEY']
 ON_PAYLOAD = "{\"on\":true, \"sat\":254, \"bri\":254,\"hue\":0}"
 OFF_PAYLOAD = "{\n \"on\": false,\n \"xy\": [\n 0.4351,\n 0.4064\n],\n \
                 \"sat\":254,\n \"bri\":254,\n \"hue\":0\n}"
-URL4 = "https://hue-bridge.service.consul/api/" + API_KEY + "/lights/" + sys.argv[1] + "/state"
+URL4 = "http://localhost:5000/api/" + API_KEY + "/lights/" + sys.argv[1] + "/state"
 
 # Send the on payload to turn on the lamp
 requests.request("PUT", URL4, data=ON_PAYLOAD, verify=False)
