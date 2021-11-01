@@ -14,9 +14,12 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 # Read the API key
 API_KEY = os.environ['HUE_API_KEY']
 
+# Read the API URL
+API_URL = os.environ['HUE_API_URL']
+
 # Initialize other variables
 OFF_PAYLOAD = "{\n \"on\": false,\n \"xy\": [\n 0.4351,\n 0.4064\n],\n \
                 \"sat\":254,\n \"bri\":254,\n \"hue\":0\n}"
-URL4 = "http://localhost:5000/api/" + API_KEY + "/lights/" + sys.argv[1] + "/state"
+URL = API_URL + API_KEY + "/lights/" + sys.argv[1] + "/state"
 
-requests.request("PUT", URL4, data=OFF_PAYLOAD, verify=False)
+requests.request("PUT", URL, data=OFF_PAYLOAD, verify=False)

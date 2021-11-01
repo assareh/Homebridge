@@ -15,24 +15,27 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 # Read the API key
 API_KEY = os.environ['HUE_API_KEY']
 
+# Read the API URL
+API_URL = os.environ['HUE_API_URL']
+
 # Initialize other variables
 ON_PAYLOAD = "{\"on\":true, \"sat\":254, \"bri\":254,\"hue\":0}"
 OFF_PAYLOAD = "{\n \"on\": false,\n \"xy\": [\n 0.4351,\n 0.4064\n],\n \
                 \"sat\":254,\n \"bri\":254,\n \"hue\":0\n}"
-URL4 = "http://localhost:5000/api/" + API_KEY + "/lights/" + sys.argv[1] + "/state"
+URL = API_URL + API_KEY + "/lights/" + sys.argv[1] + "/state"
 
 # Send the on payload to turn on the lamp
-requests.request("PUT", URL4, data=ON_PAYLOAD, verify=False)
+requests.request("PUT", URL, data=ON_PAYLOAD, verify=False)
 
 # Cycle the hue
 for j in range(0, 20):
     for i in range(0, 132):
         PAYLOAD = "{\"hue\":" + str(i*500) + "}"
-        requests.request("PUT", URL4, data=PAYLOAD, verify=False)
+        requests.request("PUT", URL, data=PAYLOAD, verify=False)
     j = j + 1
 
 # Send the off payload to turn off the lamp
-requests.request("PUT", URL4, data=OFF_PAYLOAD, verify=False)
+requests.request("PUT", URL, data=OFF_PAYLOAD, verify=False)
 
 # Clear the flag to turn it off in HomeKit
 if sys.argv[1] == '4':

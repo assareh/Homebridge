@@ -13,7 +13,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 def current_state():
     """ This function returns the current color parameters """
     
-    URL = "http://localhost:5000/api/" + API_KEY + "/lights/4"
+    URL = API_URL + API_KEY + "/lights/4"
     current = requests.request("GET", URL, verify=False)
     x = current.json()['state']['xy'][0]
     y = current.json()['state']['xy'][1]
@@ -49,27 +49,23 @@ def crossfade(begin_state, end_state):
              ",\n            " + str(temp_y) + "\n        ],\n    \"sat\":" + \
                  str(int(temp_sat)) + ",\n    \"bri\":" + str(int(temp_bri)) + \
                      ",\n    \"hue\":" + str(int(temp_hue)) + "\n}"
-        requests.request("PUT", URL4, data=temp_payload, verify=False)
+        requests.request("PUT", URL, data=temp_payload, verify=False)
         time.sleep(0.1)
 
 
 # Read the API key
 API_KEY = os.environ['HUE_API_KEY']
 
+# Read the API URL
+API_URL = os.environ['HUE_API_URL']
+
 # Initialize other variables
-URL4 = "http://localhost:5000/api/" + API_KEY + "/lights/4/state"
+URL = API_URL + API_KEY + "/lights/4/state"
 
 # state definitions
 # BEGIN_STATE = {'x': 0.4444, 'y': 0.4053, 'bri': 127, 'hue': 8496, 'sat': 118}
 BEGIN_STATE = current_state()
 END_STATE = {'x': 0.6922, 'y': 0.3076, 'bri': 2, 'hue': 0, 'sat': 254}
-
-# initialize lights to storytime
-# PAYLOAD = "{\n    \"on\": true,\n    \"xy\": [\n            " + str(BEGIN_STATE['x'])\
-#     + ",\n            " + str(BEGIN_STATE['y']) + "\n        ],\n    \"sat\":" + \
-#         str(BEGIN_STATE['sat']) + ",\n    \"bri\":" + str(BEGIN_STATE['bri']) + \
-#             ",\n    \"hue\":" + str(BEGIN_STATE['hue']) + "\n}"
-# requests.request("PUT", URL4, data=PAYLOAD, verify=False)
 
 crossfade(BEGIN_STATE, END_STATE)
 
@@ -78,7 +74,7 @@ PAYLOAD = "{\n    \"on\": true,\n    \"xy\": [\n            " + str(END_STATE['x
     ",\n            " + str(END_STATE['y']) + "\n        ],\n    \"sat\":" + \
         str(END_STATE['sat']) + ",\n    \"bri\":" + str(END_STATE['bri']) + \
             ",\n    \"hue\":" + str(END_STATE['hue']) + "\n}"
-requests.request("PUT", URL4, data=PAYLOAD, verify=False)
+requests.request("PUT", URL, data=PAYLOAD, verify=False)
 
 # Clear the flag to turn it off in HomeKit
 os.remove(os.path.join(os.path.dirname(__file__), 'bedtime') + '.pid')
