@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-""" This script powers on the specified lamp to a specified color
+""" This script powers off the specified lamp to a specified color
     3 is Office """
 
 import os
@@ -16,16 +16,16 @@ API_KEY = os.environ['HUE_API_KEY']
 API_URL = os.environ['HUE_API_URL']
 
 # Initialize other variables
-ON_PAYLOAD = "{\n \"on\": true,\n \"xy\": [\n 0.1914,\n 0.326\n],\n \
+OFF_PAYLOAD = "{\n \"on\": false,\n \"xy\": [\n 0.4351,\n 0.4064\n],\n \
                 \"sat\":254,\n \"bri\":254,\n \"hue\":0\n}"
+API_KEY = os.environ['HUE_API_KEY']
 URL = API_URL + API_KEY + "/lights/3/state"
 
 
-def turn_on(url):
-    ''' turn on light
+def turn_off(url):
+    ''' turn off light
         accepts the url of the light as parameter '''
-    requests.request("PUT", url, data=ON_PAYLOAD, verify=False)
+    requests.request("PUT", url, data=OFF_PAYLOAD, verify=False)
 
 
-# initialize lights
-turn_on(URL)
+turn_off(URL)

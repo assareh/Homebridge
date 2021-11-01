@@ -14,3 +14,6 @@ kill $pid
 
 # clean up
 rm -rf $PID_FILE
+
+# turn off the light
+python /homebridge/scripts/office_off.py

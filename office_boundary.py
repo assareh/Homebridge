@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
 """ This script powers on the specified lamp to a specified color
-    Requires a command line argument of lamp number
-    4 is Leo's Lamp
-    3 is Office
-    2 is Living Room Color """
+    3 is Office """
 
 import os
 import requests

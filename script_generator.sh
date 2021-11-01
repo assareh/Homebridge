@@ -26,6 +26,9 @@ kill \$pid
 
 # clean up
 rm -rf \$PID_FILE
+
+# turn off the light
+python /homebridge/scripts/office_off.py
 EOF
 tee office_${color}_state.sh <<EOS
 #!/bin/sh
