@@ -16,8 +16,7 @@ API_KEY = os.environ['HUE_API_KEY']
 API_URL = os.environ['HUE_API_URL']
 
 # Initialize other variables
-OFF_PAYLOAD = "{\n \"on\": false,\n \"xy\": [\n 0.4351,\n 0.4064\n],\n \
-                \"sat\":254,\n \"bri\":254,\n \"hue\":0\n}"
+OFF_PAYLOAD = "{\n \"on\": false}"
 API_KEY = os.environ['HUE_API_KEY']
 URL = API_URL + API_KEY + "/lights/3/state"
 
