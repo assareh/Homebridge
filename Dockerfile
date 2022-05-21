@@ -1,4 +1,4 @@
-FROM oznu/homebridge:4.0.0
+FROM oznu/homebridge:latest
 
 # install pip
 RUN /usr/bin/python -m ensurepip
