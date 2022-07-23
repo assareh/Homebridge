@@ -5,6 +5,6 @@ if [ -f "$pidfile" ] && kill -0 `cat $pidfile` 2>/dev/null; then
     exit 1
 fi  
 
-cd /homebridge/scripts && python3.6 garagedoor_reminder.py &
+cd /homebridge/scripts && python3 garagedoor_reminder.py &
 echo "Started $!"
 echo $! >$pidfile
