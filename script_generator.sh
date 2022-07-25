@@ -5,7 +5,7 @@ for color in ${allColors[@]}; do
 echo $color
 tee office_${color}_on.sh <<EOO
 #!/bin/sh
-python /homebridge/scripts/office_$color.py &
+python3 /homebridge/scripts/office_$color.py &
 echo $! >/homebridge/scripts/office_$color.pid
 echo "Started \$!"
 EOO
@@ -28,7 +28,7 @@ kill \$pid
 rm -rf \$PID_FILE
 
 # turn off the light
-python /homebridge/scripts/office_off.py
+python3 /homebridge/scripts/office_off.py
 EOF
 tee office_${color}_state.sh <<EOS
 #!/bin/sh

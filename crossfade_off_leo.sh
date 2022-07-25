@@ -16,4 +16,4 @@ kill $pid
 rm -rf $PID_FILE
 
 # turn off the light
-python /homebridge/scripts/crossfade_off.py 4
+python3 /homebridge/scripts/crossfade_off.py 4

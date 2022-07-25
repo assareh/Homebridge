@@ -1,4 +1,4 @@
 #!/bin/sh
-python /homebridge/scripts/bedtime_fade.py &
+python3 /homebridge/scripts/bedtime_fade.py &
 echo $! >/homebridge/scripts/bedtime.pid
 echo "Started $!"
